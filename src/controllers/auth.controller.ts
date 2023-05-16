@@ -4,6 +4,7 @@ import { loginValidator } from "../utils/validator";
 import { StatusCodes } from "http-status-codes";
 import { createUser, findUser } from "../services/auth.service";
 import { createToken } from "../utils/authorize.util";
+import * as bcrypt from "bcrypt";
 
 export const login = async (req: Request, res: Response) => {
   const { email, password }: UserInput = req.body;
@@ -15,15 +16,19 @@ export const login = async (req: Request, res: Response) => {
   }
 
   const user = await findUser(email);
-
-  if (user) {
-    return res.status(StatusCodes.OK).send({
-      message: "로그인 성공",
-      token: createToken(email),
-    });
-  } else {
+  if (!user) {
     return res.status(StatusCodes.BAD_REQUEST).send("존재하지 않는 유저입니다");
   }
+
+  const matchPassword = await bcrypt.compare(password, user.password);
+
+  if (!matchPassword) {
+    return res.status(StatusCodes.BAD_REQUEST).send("비밀번호가 틀렸습니다");
+  }
+  return res.status(StatusCodes.OK).send({
+    message: "로그인 성공",
+    token: createToken(email),
+  });
 };
 
 export const signup = async (req: Request, res: Response) => {
