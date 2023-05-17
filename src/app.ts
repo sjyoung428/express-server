@@ -13,6 +13,6 @@ app.use(cors());
 app.use(logger);
 
 app.use("/auth", authRouter);
-app.use("/user", validateToken, userRouter);
+app.use("/users", validateToken, userRouter);
 
 export default app;

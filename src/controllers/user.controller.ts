@@ -19,6 +19,7 @@ export const getMe = async (req: Request, res: Response) => {
 
 export const updateMe = async (req: Request, res: Response) => {
   const { username } = req.body;
+
   if (username.length < 2) {
     return res
       .status(StatusCodes.BAD_REQUEST)
