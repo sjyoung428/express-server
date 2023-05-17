@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { UserInput } from "../types/user";
 import { loginValidator } from "../utils/validator";
 import { StatusCodes } from "http-status-codes";
-import { createUser, findUser } from "../services/auth.service";
+import { createUser, findUser } from "../services/user.service";
 import { createToken } from "../utils/authorize.util";
 import * as bcrypt from "bcrypt";
 
@@ -22,12 +22,14 @@ export const login = async (req: Request, res: Response) => {
 
   const matchPassword = await bcrypt.compare(password, user.password);
 
+  const token = createToken(email);
+
   if (!matchPassword) {
     return res.status(StatusCodes.BAD_REQUEST).send("비밀번호가 틀렸습니다");
   }
   return res.status(StatusCodes.OK).send({
     message: "로그인 성공",
-    token: createToken(email),
+    token,
   });
 };
 
