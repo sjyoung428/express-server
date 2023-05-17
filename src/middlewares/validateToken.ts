@@ -8,7 +8,9 @@ export const validateToken = (
 ) => {
   const token = req.headers.authorization;
   if (!token) {
-    return res.status(StatusCodes.BAD_REQUEST).send("Token is missing");
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ message: "Token is missing" });
   }
   next();
 };

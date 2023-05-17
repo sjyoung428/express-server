@@ -12,15 +12,24 @@ export const getMe = async (req: Request, res: Response) => {
   const email = verifyToken(token);
   if (typeof email === "string") {
     const user = await findUser(email);
+
+    if (!user) {
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ message: "존재하지 않는 유저입니다" });
+    }
+
     return res.status(StatusCodes.OK).json({
-      id: user?.id,
-      email: user?.email,
-      username: user?.username,
-      createdAt: user?.createdAt,
-      updatedAt: user?.updatedAt,
+      id: user.id,
+      email: user.email,
+      username: user.username,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
     });
   }
-  return res.status(StatusCodes.BAD_REQUEST).send("유효하지 않은 토큰입니다");
+  return res
+    .status(StatusCodes.BAD_REQUEST)
+    .json({ message: "유효하지 않은 토큰입니다" });
 };
 
 export const updateMe = async (req: Request, res: Response) => {
@@ -29,7 +38,7 @@ export const updateMe = async (req: Request, res: Response) => {
   if (username.length < 2) {
     return res
       .status(StatusCodes.BAD_REQUEST)
-      .send("닉네임은 2글자 이상이어야 합니다");
+      .json({ message: "닉네임은 2글자 이상이어야 합니다" });
   }
 
   let token = "";
@@ -40,9 +49,11 @@ export const updateMe = async (req: Request, res: Response) => {
   const email = verifyToken(token);
   if (typeof email === "string") {
     await updateUsername(email, username);
-    return res.status(StatusCodes.OK).send({
+    return res.status(StatusCodes.OK).json({
       message: "닉네임 변경 성공",
     });
   }
-  return res.status(StatusCodes.BAD_REQUEST).send("유효하지 않은 토큰입니다");
+  return res
+    .status(StatusCodes.BAD_REQUEST)
+    .json({ message: "유효하지 않은 토큰입니다" });
 };
