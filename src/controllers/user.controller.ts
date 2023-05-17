@@ -12,7 +12,13 @@ export const getMe = async (req: Request, res: Response) => {
   const email = verifyToken(token);
   if (typeof email === "string") {
     const user = await findUser(email);
-    return res.status(StatusCodes.OK).send(user);
+    return res.status(StatusCodes.OK).json({
+      id: user?.id,
+      email: user?.email,
+      username: user?.username,
+      createdAt: user?.createdAt,
+      updatedAt: user?.updatedAt,
+    });
   }
   return res.status(StatusCodes.BAD_REQUEST).send("유효하지 않은 토큰입니다");
 };
