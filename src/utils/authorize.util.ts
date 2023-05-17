@@ -13,3 +13,7 @@ export const verifyToken = (token: string) => {
 export const decodeToken = (token: string) => {
   return jwt.decode(token);
 };
+
+export const parseToken = (token: string) => {
+  return token.includes("Bearer") ? token.split(" ")[1] : token;
+};
