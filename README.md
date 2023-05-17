@@ -89,6 +89,10 @@
 
   - Authorization: login token
 
+  parameter
+
+  - username: string
+
   응답 예시
 
   ```json
