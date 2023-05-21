@@ -7,7 +7,7 @@
     "dev": "nodemon --watch '*.ts' --exec 'ts-node' src/index.ts",
     "build": "tsc",
     "studio": "prisma studio",
-    "start": "node build/index.js"
+    "start": "node ./build/index.js"
   },
   "author": "",
   "license": "MIT",
