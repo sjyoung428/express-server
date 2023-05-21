@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, User } from "@prisma/client";
 import * as bcrypt from "bcrypt";
 
 declare global {
@@ -12,7 +12,7 @@ export default db;
 
 db.$use(async (params, next) => {
   if (params.action === "create" && params.model === "User") {
-    const user = params.args.data;
+    const user = params.args.data as User;
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(user.password, salt);
     user.password = hash;
