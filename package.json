@@ -7,7 +7,7 @@
     "dev": "nodemon --watch '*.ts' --exec 'ts-node' src/index.ts",
     "build": "prisma generate && prisma migrate deploy && tsc",
     "studio": "prisma studio",
-    "start": "concurrently \"npm run dev\" \"npx prisma studio\""
+    "start": "concurrently \"node build/index.js\" \"npx prisma studio\""
   },
   "author": "",
   "license": "MIT",
