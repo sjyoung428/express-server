@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --watch '*.ts' --exec 'ts-node' src/index.ts"
+    "dev": "nodemon --watch '*.ts' --exec 'ts-node' src/index.ts",
+    "build": "prisma generate && prisma migrate deploy && tsc",
+    "studio": "prisma studio",
+    "start": "concurrently \"npm run dev\" \"npx prisma studio\""
   },
   "author": "",
   "license": "MIT",
@@ -27,6 +30,7 @@
     "@types/morgan": "^1.9.4",
     "@types/node": "^20.1.5",
     "@types/validator": "^13.7.17",
+    "concurrently": "^8.0.1",
     "nodemon": "^2.0.22",
     "prisma": "^4.14.0",
     "ts-node": "^10.9.1",
