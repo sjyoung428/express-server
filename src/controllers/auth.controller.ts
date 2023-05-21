@@ -8,7 +8,6 @@ import * as bcrypt from "bcrypt";
 
 export const login = async (req: Request, res: Response) => {
   const { email, password }: UserInput = req.body;
-
   const { isValid, message } = loginValidator({ email, password });
 
   if (!isValid) {
@@ -39,7 +38,6 @@ export const login = async (req: Request, res: Response) => {
 
 export const signup = async (req: Request, res: Response) => {
   const { email, password }: UserInput = req.body;
-
   const { isValid, message } = loginValidator({ email, password });
 
   if (!isValid) {
