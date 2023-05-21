@@ -4,7 +4,7 @@ import { User } from "../types/user";
 
 export const EncryptPassword: Prisma.Middleware<User> = async (
   params: Prisma.MiddlewareParams,
-  next
+  next: (params: Prisma.MiddlewareParams) => Promise<User>
 ) => {
   if (params.action === "create" && params.model === "User") {
     let user = params.args.data as User;
