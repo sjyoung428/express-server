@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { EncryptPassword } from "./prisma.middlewares";
+import { EncryptPassword } from "./middlewares/encryptPassword";
 
 declare global {
   var db: PrismaClient | undefined;
