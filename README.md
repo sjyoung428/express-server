@@ -102,3 +102,27 @@
     "message": "닉네임 변경 성공"
   }
   ```
+
+## Feed
+
+- fead
+
+  method
+
+  - post
+
+  endpoint
+
+  - `/feed `
+
+  headers
+
+  - Authorization: login token
+
+    응답 예시
+
+  ```json
+  {
+    "message": "버튼 눌림"
+  }
+  ```
