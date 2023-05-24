@@ -1,4 +1,3 @@
-import axios from "axios";
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import { api } from "../api/axios.instance";
