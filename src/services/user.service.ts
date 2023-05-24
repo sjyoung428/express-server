@@ -1,5 +1,5 @@
 import { UserInput } from "../types/user";
-import db from "../prisma/prisma";
+import { db } from "../prisma/prisma.instance";
 
 export const createUser = ({ email, password }: UserInput) => {
   const username = email.split("@")[0] || "";
