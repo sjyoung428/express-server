@@ -3,7 +3,7 @@ import { StatusCodes } from "http-status-codes";
 import { api } from "../api/axios.instance";
 
 export const feed = async (req: Request, res: Response) => {
-  const response = await api.post("/post?message=TEXT_MESSAGE");
+  const response = await api.post("/post?message=TEST_MESSAGE");
   const { data } = response;
   console.log(data);
 
