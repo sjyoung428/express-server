@@ -4,7 +4,7 @@ import { api } from "../api/axios.instance";
 
 export const feed = async (req: Request, res: Response) => {
   try {
-    const response = await api.post("/post?message=TEST_MESSAGE");
+    const response = await api.post("/feed");
     const { data } = response;
     console.log(data);
   } catch (err) {
